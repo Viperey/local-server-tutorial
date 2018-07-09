@@ -188,7 +188,13 @@ In such case, you might have to change your file permissions or even add our own
 
 ```sh
 sudo service transmission-daemon stop #JIC, if not, any change made over the settings JSON, will be ignored.
-sudo vim /etc/transmission-daemon/settings.json
+sudo vim /lib/systemd/system/transmission-daemon.service # Change user to custom
+# From here: https://help.ubuntu.com/community/TransmissionHowTo
+# Do the umask
+vim ~/.config/transmission-daemon/settings.json
+# Change fields mentioned in the next snippet
+# Check that download folder belongs to your user
+sudo reboot
 ```
 
 Some fields you may want to change:
