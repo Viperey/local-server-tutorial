@@ -189,15 +189,15 @@ In such case, you might have to change your file permissions or even add our own
 ```sh
 sudo service transmission-daemon stop #JIC, if not, any change made over the settings JSON, will be ignored.
 sudo vim /lib/systemd/system/transmission-daemon.service # Change user to custom
-# From here: https://help.ubuntu.com/community/TransmissionHowTo
-# Do the umask
 vim ~/.config/transmission-daemon/settings.json
 # Change fields mentioned in the next snippet
 # Check that download folder belongs to your user
 sudo reboot
 ```
 
-Some fields you may want to change:
+
+## Fields to change in your settings.json
+
 ```JSON
 "download-dir": "download-dir"
 "incomplete-dir-enabled": true
@@ -209,12 +209,18 @@ Some fields you may want to change:
 "rpc-whitelist": "127.0.0.1"
 ```
 
-```sh
-sudo service transmission-daemon start
-```
-
 And that's it! You can now check on your browser (http://animal/transmission/web).
+If fails, some useful commands:
++ `sudo tail -f /var/log/syslog | grep -i transmission`
++ `sudo systemctl daemon-reload && sudo service transmission-daemon restart`
 
+## Transmission daemon bibliography
+
++ https://askubuntu.com/questions/261252/how-do-i-change-the-user-transmission-runs-under
++ https://askubuntu.com/questions/221081/permission-denied-when-downloading-with-transmission-deamon
++ https://askubuntu.com/questions/261252/how-do-i-change-the-user-transmission-runs-under
++ https://help.ubuntu.com/community/TransmissionHowTo
++ https://wiki.archlinux.org/index.php/transmission#Configuring_the_daemon # new user location
 
 
 # Kodi (or OSMC)
